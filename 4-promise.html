@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+    <script src="../../前端库/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            var id;
+            // $.ajax({
+            //     url: '',
+            //     method: 'get',
+            //     success: function (res) {
+            //         // console.log(res.data[0].id);
+            //         id = res.data[0].id;
+            //         $.ajax({
+            //             url: '?id' + id,
+            //             method: 'get',
+            //             success: function (r) {
+            //                 console.log(r);
+            //             },
+            //             error: function (e) {
+            //                 console.log(e)
+            //             }
+            //         })
+            //     }
+            // })
+
+            // 承诺对象
+            let p = new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '',
+                    method: 'get',
+                    success: function (res) {
+                        // console.log(res.data[0].id);
+                        // id = res.data[0].id;
+                        resolve(res);
+                    },
+                    error: function (e) {
+                        reject(e);
+                    }
+                })
+            })
+            // 成功执行.then   then中的回调就是resolve
+            // 失败执行.catch  catch中的回调是reject
+            // finally 不管是成功还是失败都要执行
+            p.then((r) => {
+                console.log(r.data[0].id);
+            }).catch((e) => {
+                console.log(e);
+            }).finally(() => {
+                console.log('结束了！');
+            })
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

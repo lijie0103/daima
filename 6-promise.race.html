@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../前端库/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            // 承诺对象
+            let p1 = new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '',
+                    method: 'get',
+                    success: function (res) {
+                        // console.log(res.data[0].id);
+                        // id = res.data[0].id;
+                        resolve(res);
+                    },
+                    error: function (e) {
+                        reject(e);
+                    }
+                })
+            })
+
+            // 承诺对象
+            let p2 = new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '',
+                    method: 'get',
+                    success: function (res) {
+                        // console.log(res.data[0].id);
+                        // id = res.data[0].id;
+                        resolve(res);
+                    },
+                    error: function (e) {
+                        reject(e);
+                    }
+                })
+            })
+
+            // 将p1.p2组成一个新的实例
+            // race接受的是一个数组
+            // p是一个新的承诺对象
+            let p = Promise.race([p1, p2]);
+            // p的状态取决于第一个改变状态的promise实例
+            // p1,p2都是成功，p则为成功
+            // p1,p2有一个失败,p则为失败
+            p.then((res) => {
+                console.log(res);
+            }).catch((e) => {
+                console.log(e);
+            })
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
