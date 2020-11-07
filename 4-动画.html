@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: rosybrown;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+    <button>透明度</button>
+    <div>
+
+    </div>
+    <script>
+        $(function(){
+            $('button:contains("隐藏")').click(function(){
+                $('div').fadeOut();
+            })
+            $('button:contains("显示")').click(function(){
+                $('div').fadeIn(4000,function(){
+                    $(this).text('Animtion Done');
+                })
+            })
+            $('button:contains("切换")').click(function(){
+                $('div').slideToggle("fast",function(){
+                    alert('animation done')
+                });
+            })
+            $('button:contains("透明度")').click(function(){
+                $('div').fadeTo(4000,0.25);
+            })
+        })
+    </script>
+</body>
+</html>

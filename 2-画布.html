@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布</title>
+</head>
+<body>
+    <canvas id="canvas" width="400px" height="400px" style="border: 1px solid red;"></canvas>
+    <script>
+        window.onload = function(){
+            // 获得画布对象
+            var canvas = document.getElementById('canvas');
+            // 获得图形上下文
+            var context = canvas.getContext('2d');
+
+            // 绘制的样式
+            // fillstyle填充色
+            context.fillStyle='pink';
+            // strokestyle边框色
+            context.strokeStyle='red';
+            context.lineWidth=5;
+            
+            // 绘制矩形
+            // fillrect(x起点，y起点，宽度，高度)
+            context.fillRect(100,100,200,200);
+            context.strokeRect(0, 0, 100, 100);
+            context.clearRect(150, 150, 50, 50);
+            context.clearRect(200, 200, 50, 50); 
+        }
+    </script>
+</body>
+</html>

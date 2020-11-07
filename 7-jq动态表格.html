@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态表格</title>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <style>
+        .table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th ,
+        .table td {
+            border: 1px solid #ccc;
+            line-height: 1.5em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="btns">
+        <button id="btn_add">添加</button>
+        <button>批量导入</button>
+    </div>
+    <div class="tbl">
+        <table class="table" id="tbl_user">
+            <thead>
+                <tr>
+                    <th width="100px">编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>张小明</td>
+                    <td>男</td>
+                    <td>
+                        <a href="" class="btn_del">删除</a>
+                        <a href="" class="btn_edit">修改</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var $btn_add = $('#btn_add');
+        var $tbl_user = $("#tbl_user");
+
+        //为每个删除绑定事件
+        // Array.from(document.querySelectorAll(".btn_del")).forEach(
+        // (item) => {
+        //     item.onclick = function(){
+        //         alert(1);
+        //         //阻止默认行为
+        //         event.preventDefault();
+        //     }
+        // })
+
+        //事件代理
+        $tbl_user.on('click','a',function(event){
+           var target = $(event.target);
+               switch(target.attr('class')){
+                    case "btn_del":
+                        // alert("删除");
+                        // console.log(target.parentNode.parentNode.
+                        // parentNode.removeChild(target.parentNode.parentNode));
+                        target.parents("tr").remove();
+                        break;
+                    case "btn_edit":
+                        alert("修改");
+                        break;
+               }
+            return false;
+        })
+
+
+        //添加
+        $btn_add.on('click',function(){
+            var $new_tr =$(
+                `<tr>
+                    <td><input type="checkbox"></td>
+                    <td>` +Math.random()+ `</td>
+                    <td>男</td>
+                    <td>
+                        <a href="" class="btn_del">删除</a>
+                        <a href="" class="btn_edit">修改</a>
+                    </td>
+                </tr>`
+            ).appendTo($("#tbl_user > tbody"));
+        });
+    </script>
+</body>
+</html>

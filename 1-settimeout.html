@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超时调用</title>
+</head>
+<body>
+    <button id="btn_cal1">取消超时调用</button>
+    <button id="btn_cal2">取消间歇调用</button>
+
+    <script>
+        console.log(new Date().getTime());
+        var flag = setTimeout(function(){
+            console.log(new Date().getTime());
+            console.log("start...")
+        }, 3000);
+        console.log("flag",flag);
+
+        document.querySelector("#btn_cal1").onclick = function(){
+            clearTimeout(flag);
+        }
+
+        var index = setInterval(() => {
+            console.log("情人节来了。。。" + new Date().getTime());
+        }, 2000);
+        console.log("index:",index);
+        
+        document.querySelector("#btn_cal2").onclick = function(){
+            clearInterval(index);
+            console.log("取消成功");
+        }
+           
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        .outer {
+            height: 150px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .inner {
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+            border: 1px dotted blueviolet;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer"></div>
+    <div class="outer"></div>
+    <div class="inner" id="one" draggable="true"></div>
+    <div class="inner" id="two" draggable="true"></div>
+    <div class="inner" id="three" draggable="true"></div>
+    <script>
+        window.onload = function(){
+            var outer = document.getElementsByClassName('outer');
+            var inner = document.getElementsByClassName('inner');
+            inner = Array.from(inner);
+            outer = Array.from(outer);
+            console.log(inner);
+            console.log(outer);
+            // 拖拽开始
+            function dragstart(event){
+                event.dataTransfer.setData('id',this.id);
+            }
+            function dragover(event){
+                event.presentDefault();
+            }
+            function drop(event){
+                var oid = event.dataTransfer.getData('id');
+                var dom = document.getElementById(oid);
+                this.append(dom);
+            }
+            inner.forEach(function(item){
+                item.dragstart = dragstart();
+            })
+            outer.forEach(function(item){
+                item.dragover = dragover();
+            })
+        }
+    </script>
+</body>
+</html>

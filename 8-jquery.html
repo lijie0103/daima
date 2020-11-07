@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquert</title>
+    <script src="../js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>hello world!</h1>
+        <h1>你好jquert!</h1>
+    </div>
+    <script>
+        // var $app = document.querySelector("#app");
+        var $app = $("h1");
+        console.log($app);
+        console.log($app[0]);
+        console.log($app[1]);
+        console.log($app instanceof jQuery);
+
+        $app.on('click',function(){
+            alert(1);
+        })
+        $app.append($('<h2>子标题</h2>'));
+
+        setTimeout(() => {
+            $app.empty();
+        }, 2000);
+    </script>
+</body>
+</html>

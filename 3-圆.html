@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圆</title>
+</head>
+<body>
+    <canvas id="canvas" width="400px" height="400px" style="border: 1px dotted red;"></canvas>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            // 绘制圆
+            // 开始路径
+            context.beginPath();
+            // 设置路径
+            context.arc(200, 200, 100, Math.PI / 180 * 0, Math.PI / 180 * 180, true);
+
+            // 借宿路径
+            context.closePath();
+            // context.fillStyle='coral';
+            // context.fill();
+            context.strokeStyle='coral';
+            context.stroke();    
+        }
+    </script>
+</body>
+</html>

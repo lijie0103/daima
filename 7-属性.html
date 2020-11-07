@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性</title>
+    <script src="../前端库/jquery-3.5.1.min.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 150px;
+            background-color: blue;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="one" title="这是一个div"></div>
+    <div class="two" title="这是另一个div"></div>
+    <script>
+        $(function(){
+            // var a = $('.one').attr('title','改变');
+            // var a = $('.one').prop('title');
+            // console.log(a);
+            $('.two').removeAttr('title');
+        })
+    </script>
+</body>
+</html>

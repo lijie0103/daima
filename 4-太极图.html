@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布</title>
+    <style>
+        canvas {
+            animation: move 1s linear infinite;
+        }
+        @keyframes move {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400px" height="400px"></canvas>
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            // 大圆
+            context.beginPath();
+            context.arc(200, 200, 200, Math.PI / 180 * 90, Math.PI / 180 * 270);
+            context.closePath();
+            context.fillStyle = 'black';
+            context.fill();
+
+            context.beginPath();
+            context.arc(200, 200, 200, Math.PI / 180 * 270, Math.PI / 180 * 90);
+            context.closePath();
+            context.fillStyle = 'red';
+            context.fill();
+
+            // 中圆
+            context.beginPath();
+            context.arc(200, 100, 100, Math.PI / 180 * 0, Math.PI / 180 * 360);
+            context.closePath();
+            context.fillStyle = 'black';
+            context.fill();
+
+            context.beginPath();
+            context.arc(200, 300, 100, Math.PI / 180 * 0, Math.PI / 180 * 360);
+            context.closePath();
+            context.fillStyle = 'red';
+            context.fill();
+            
+            // 小圆
+            context.beginPath();
+            context.arc(200, 100, 20, Math.PI / 180 * 0, Math.PI / 180 * 360);
+            context.closePath();
+            context.fillStyle = 'red';
+            context.fill();
+
+            context.beginPath();
+            context.arc(200, 300, 20, Math.PI / 180 * 0, Math.PI / 180 * 360);
+            context.closePath();
+            context.fillStyle = 'black';
+            context.fill();
+        }
+    </script>
+</body>
+</html>

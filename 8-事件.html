@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+    <script src="../前端库/jquery-3.5.1.min.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        span {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <button>解除绑定</button>
+    <div></div>
+    <span></span>
+    <button class="btn">改变</button>
+    <input type="text" name="" id="">
+    <script>
+        $(function(){
+            // $('div').click(function(){
+            //     alert('1');
+            // })
+            // $('div').on('click',function(){
+            //     alert('1');
+            // })
+            
+            $('div').on({
+                click:function(){
+                    console.log("点击");
+                },
+                mouseover:function(){
+                    console.log('悬浮');
+                }
+            })
+            // $('button').click(function(){
+            //     $('div').off();
+            // })
+            $('button').on('click',function(){
+                $('div').off("mouseover");
+            })
+
+            $('span').click(function(){
+                $('span').css('background-color','blue');
+            })
+            // 模拟点击
+            $('.btn').click(function(){
+                $('span').trigger('click');
+            })
+        })
+    </script>
+</body>
+</html>

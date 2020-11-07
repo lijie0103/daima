@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lunbo</title>
+    <script src="../jquery-3.5.1.min.js"></script>
+    <style>
+        .main {
+            width: 200px;
+            height: 150px;
+            background-color: pink;
+            background-size: 100%;
+        }
+        span {
+            display: inline-block;
+            width: 47px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            background-color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="main"></div>
+    <div class="content">
+        <span>one</span>
+        <span>two</span>
+        <span>three</span>
+        <span>four</span>
+    </div>
+    <script>
+        $(function(){
+            $('.content').on({
+                mouseover:function(){
+                    // console.log($(this).text());
+                    if($(this).text() == 'one'){
+                        $('.main').css('background-image','url(../day02/img/111.webp)');
+                    }else if($(this).text() == 'two'){
+                        $('.main').css('background-image','url(../day02/img/222.webp)')
+                    }else if($(this).text() == 'three'){
+                        $('.main').css('background-image','url(../day02/img/333.webp)')
+                    }else if($(this).text() == 'four'){
+                        $('.main').css('background-image','url(../day02/img/444.webp)')
+                    }
+                }
+            },'span')
+        })
+    </script>
+</body>
+</html>

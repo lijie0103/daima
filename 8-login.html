@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理</title>
+    <style>
+        html {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        body {
+            width: 100vw;
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #f4f4f4;
+        }
+
+        .content {
+            width: 1090px;
+            margin: 0 auto;
+            padding-top: 100px;
+        }
+
+        /* 登陆窗口 */
+        .login_block {
+            width: 400px;
+            margin: 100px auto;
+            border: 1px solid #f4f4f4;
+        }
+
+        .content .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .login_block>div {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .login_block>div:last-child {
+            margin-bottom: 50px;
+        }
+
+        .login_block span {
+            display: inline-block;
+            width: 100px;
+        }
+
+        /* 欢迎窗口 */
+
+        #welcome_block {
+            font-size: 20px;
+            font-weight: 400;
+            display: none;
+        }
+
+        #welcome_block #welcome_username {
+            margin-left: 20px;
+            font-size: 24px;
+            font-weight: bolder;
+        }
+
+        .welcome_text {
+            margin-left: 200px;
+        }
+
+        /* 窗口操作 */
+        #page_search,
+        #page_change {
+            margin-right: 200px;
+            float: right;
+        }
+
+        #page_change {
+            display: none;
+        }
+
+        .welcome_text::after {
+            clear: clear;
+            counter-reset: "";
+            display: block;
+        }
+
+        /* 表格 */
+        #tbl_info {
+            width: 100%;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        #tbl_info table {
+            width: 100%;
+        }
+
+        #tbl_info tr,
+        td {
+            line-height: 50px;
+        }
+
+        .info_img {
+            width: 30%;
+        }
+
+        .info_name {
+            width: 20%;
+        }
+
+        .info_gender {
+            width: 15%;
+        }
+
+        .info_tel {
+            width: 20%;
+        }
+
+        .info_oper {
+            width: 15%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <!-- 登陆 -->
+        <form action="" method="post" id="login_form">
+            <div class="login_block">
+                <div class="logo">
+                    <span>登录窗口</span>
+                </div>
+                <div class="username_block">
+                    <span class="login_text">用户名</span>
+                    <input type="text" id="username">
+                </div>
+                <div class="password_block">
+                    <span class="login_text">密 码</span>
+                    <input type="password" id="password">
+                </div>
+                <div class="btn_block">
+                    <button type="submit">登 陆</button>
+                </div>
+            </div>
+        </form>
+        <!-- 欢迎界面 -->
+        <div id="welcome_block">
+            <div class="welcome_text">
+                <span>当前用户</span>
+                <span id="welcome_username"></span>
+                <div id="page_search">
+                    <button id="btn_search">搜索</button>
+                </div>
+                <div id="page_change">
+                    <button id="btn_bef">上一页</button>
+                    <button id="btn_reload">重新加载</button>
+                    <button id="btn_next">下一页</button>
+                </div>
+            </div>
+
+            <div>
+                <table id="tbl_info">
+                    <thead>
+                        <tr>
+                            <th class="info_img">照片</th>
+                            <th class="info_name">姓名</th>
+                            <th class="info_gender">性别</th>
+                            <th class="info_tel">手机号</th>
+                            <th class="info_oper">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 页面元素
+        var form = document.querySelector("#login_form");
+        var welcome = document.querySelector("#welcome_block");
+        var welcome_username = document.querySelector("#welcome_username");
+        var page_change = document.querySelector("#page_change");
+        var tbl_info = document.querySelector("#tbl_info");
+
+        //查询区域按钮绑定
+        var btn_search = document.querySelector("#btn_search");
+        var btn_bef = document.querySelector("#btn_bef");
+        var btn_reload = document.querySelector("#btn_reload");
+        var btn_next = document.querySelector("#btn_next");
+
+        // 全局变量
+        var token = "";
+        var page = 1;
+        var line = 10;
+        var temp_res;
+
+        // 用户登陆提交
+        form.onsubmit = function (event) {
+            var xhr = new XMLHttpRequest();
+            var username = document.querySelector('#login_form input[id=username]').value;
+            var password = document.querySelector('#login_form input[id=password]').value;
+            xhr.open('POST', 'http://localhost:7788/user/login');
+            xhr.setRequestHeader('content-type', 'application/json');
+            var data = {
+                username: username,
+                password: password
+            }
+            xhr.send(JSON.stringify(data));
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var resp = JSON.parse(xhr.response);
+                        // console.log(resp);
+                        if (resp.status === 200) {
+                            token = resp.data.token;
+                            getInfo();
+                            form.style.display = 'none';
+                            welcome.style.display = 'block';
+                        }
+                        alert(resp.message);
+                    }
+                }
+            }
+            event.preventDefault();
+        }
+        // 用户信息获取
+        function getInfo() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "http://localhost:7788/user/info?token=" + token);
+            xhr.setRequestHeader("Authorization", token);
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var resp = JSON.parse(xhr.response);
+                        welcome_username.innerText = resp.data.realname;
+                    }
+                }
+            }
+        }
+
+        // 查询按钮
+        btn_search.onclick = function () {
+            page = 1;
+            page_search(page, line);
+            btn_search.style.display = "none";
+            page_change.style.display = "block";
+            btn_bef.disabled = true;
+            btn_reload.disabled = true;
+        }
+        // 上一页
+        btn_bef.onclick = function () {
+            page--;
+            if (page == 1) {
+                btn_bef.disabled = true;
+            }
+            if (btn_next.disabled = true) {
+                btn_next.disabled = false;
+            }
+            page_search(page, line);
+        }
+        // 重新加载
+        btn_reload.onclick = function () {
+            btn_reload.disabled = true;
+            add_list(temp_res);
+        }
+        // 下一页
+        btn_next.onclick = function () {
+            if (page == 1) {
+                btn_bef.disabled = false;
+            }
+            page++;
+            page_search(page, line);
+        }
+
+        // 通用查询方法
+        function page_search(page, line) {
+            var xhr = new XMLHttpRequest();
+            var para = "page=" + page + "&" + "pageSize=" + line;
+            xhr.open("GET", "http://localhost:7788/baseUser/pageQuery?" + para);
+            xhr.setRequestHeader("Authorization", token);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var resp = JSON.parse(xhr.response);
+                        if (resp.data.list.length == 0) {
+                            alert("No More Information!!");
+                            btn_next.disabled = true;
+                            btn_reload.disabled = true;
+                            page--;
+                        }
+                        temp_res = resp;
+                        add_list(resp);
+                    }
+                }
+            }
+        }
+        // function page_search(page, line) {
+        //     var xhr = new XMLHttpRequest();
+        //     var para = "page=" + page + "&" + "pageSize=" + line;
+        //     xhr.open("GET", "http://localhost:7788/baseUser/pageQuery?" +
+        //         para);
+        //     xhr.setRequestHeader("Authorization", token);
+        //     xhr.send();
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState === 4) {
+        //             if (xhr.status === 200) {
+        //                 var resp = JSON.parse(xhr.response);
+        //                 if (resp.data.list.length == 0) {
+        //                     alert("No more Information!!");
+        //                     btn_bef.disabled = true;
+        //                     btn_reload.disabled = true;
+        //                     page--;
+        //                 }
+        //                 temp_res = resp;
+        //                 add_list(resp);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // 表格添加
+        function add_list(resp) {
+            console.log(resp);
+            var s_td = '<td>';
+            var e_td = '</td>';
+            var s_tr = '<tr>';
+            var e_tr = '</tr>';
+            var new_tr = "";
+            for (var i = 0; i < resp.data.list.length; i++) {
+                new_tr += s_tr +
+                    s_td + "<img src=" + resp.data.list[i].userFace + " width=150px height=150px>" + e_td +
+                    s_td + resp.data.list[i].realname + e_td +
+                    s_td + (resp.data.list[i].gender == "male" ? "男" : "女") + e_td +
+                    s_td + resp.data.list[i].telephone + e_td +
+                    s_td + "<a href=# class=btn_del>删除</a>" +
+                    "<a href=# class=btn_edit>修改</a>" + e_td +
+                    e_tr;
+            }
+            tbl_info.children[1].innerHTML = new_tr;
+        }
+        // 表格删除按钮
+        tbl_info.onclick = function (event) {
+            var target = event.target;
+            if (target.nodeName == "A") {
+                switch (target.getAttribute('class')) {
+                    case "btn_del":
+                        {
+                            target.parentNode.parentNode.parentNode.removeChild(target.parentNode.parentNode);
+                            btn_reload.disabled = false;
+                            break;
+                        }
+                    case "btn_edit":
+                        {
+                            break;
+                        }
+                }
+            }
+            event.preventDefault();
+        }
+    </script>
+</body>
+
+</html>

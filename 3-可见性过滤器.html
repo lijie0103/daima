@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可见性</title>
+    <script src="../前端库/jquery-3.5.1.min.js"></script>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            margin: 10px;
+        }
+        .one {
+            display: none;
+            /* visibility: hidden; */
+        }
+        .two {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="one">one</div>
+    <div class="two">two</div>
+    <script>
+        $(function(){
+            $('div:hidden').css('display',"block");
+            $('div:visible').css('visibility','visible');
+            // $('div:hidden').css('background-color','blue')
+        })
+    </script>
+</body>
+</html>
