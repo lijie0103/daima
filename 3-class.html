@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../前端库/vue.min.js"></script>
+    <style>
+        .one {
+            width: 200px;
+            height: 200px;
+            background-color: brown;
+        }
+        .text {
+            color: chartreuse;
+            background-color: chocolate;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- <div :class='{one:istrue,text:hastext}'>hahaahaaa</div> -->
+        <!-- <div :class='obj'>hahaahaaa</div> -->
+        <div :class='[one,text]'>hahaahaaa</div>
+    </div>
+    <script>
+        new Vue({
+            el:'.app',
+            data:{
+                istrue:true,
+                hastext:true,
+                obj:{
+                    one:'isture',
+                    text:'hastext'
+                },
+                one:'one',
+                text:'text'
+            }
+        })
+    </script>
+</body>
+</html>

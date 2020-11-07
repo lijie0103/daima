@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部注册</title>
+    <script src="../../前端库/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <user-lj></user-lj> 
+    </div>
+    <script>
+        // 局部注册
+        var info = {
+            template:`
+                <div>这是info组件</div>
+            `
+        }
+        // 在user组件中调用了info组件
+        var user = {
+            template:`
+                <div>
+                    <info-lj></info-lj>
+                </div>
+            `,
+            components:{
+                'info-lj':info
+            }
+        }
+        // 在vue实例中调用user组件
+        new Vue({
+            el:'#app',
+            data:{
+
+            },
+            components:{
+                'user-lj':user
+            }
+        })
+    </script>
+</body>
+</html>

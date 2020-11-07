@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件</title>
+    <script src="../../前端库/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" :title='aaa'>
+        <briup-lj :data='aaa'></briup-lj>
+    </div>
+    <script>
+        // 注册全局组件
+        // briup-lj是组件名
+        Vue.component('briup-lj',{
+            // template组件的内容
+            template:`
+                <div @click='test' :style='style'>
+                    {{data}}
+                </div>
+            `,
+            // data必须是一个函数,返回值为一个对象
+            data(){
+                return {
+                    msg:'hello',
+                    style:{
+                        width:'200px',
+                        heigth:'200px',
+                        color:'#fff',
+                        backgroundColor:'blue',
+                        textAlign:'center'
+                    }
+                }
+            },
+            methods:{
+                test(){
+                    alert('test');
+                }
+            },
+            // 子组件使用props承接父组件得到传值
+            props:['data']
+        })
+        new Vue({
+            el:'#app',
+            // 对象
+            data:{
+                aaa:'父组件传值'
+            }
+        })
+    </script>
+</body>
+</html>

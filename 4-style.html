@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>style</title>
+    <script src="../../前端库/vue.min.js"></script>
+</head>
+<body>
+    <div class="app">
+       <!-- <div :style='{color:textColor,background:bgColor}'>hahaahaaahaaha</div> -->
+       <div :style='obj'>hahaahaaahaaha</div>
+    </div>
+    <script>
+        new Vue({
+            el:'.app',
+            data:{
+                obj:{
+                    color:'red',
+                    background:'pink'
+                },
+                textColor:'green',
+                bgColor:'red'
+            }
+        })
+    </script>
+</body>
+</html>
