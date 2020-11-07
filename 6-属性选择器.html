@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性选择器</title>
+    <style>
+        form > input[name*=e]{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <a href="http://www.baidu.com">百度一下</a>
+    <form action="" method="GET" enctype="multipart/form-data">
+        用户名<input type="text" name="username"></br>
+        密码<input type="password" name="password"></br>
+        性别<label for="radio_gender_male">
+            <input id="radio_gender_male" type="radio" value="male" checked name="gender">男
+        </label>
+        <label for="radio_gender_female">
+            <input id="radio_gender_female" type="radio" value="female" checked name="gender">女
+        </label>
+        </br>
+        爱好<label>
+            <input type="checkbox" name="hobbies" id="backetball">篮球
+        </label>
+            <input type="checkbox" name="hobbies" id="football">足球
+            <input type="checkbox" name="hobbies" id="running">跑步
+            <input type="checkbox" name="hobbies" id="swimming">游泳
+        </br>
+        头像<input type="file" name="file"></br>
+        <select name="class">
+            <option value="1" selected>一班</option>
+            <option value="2">二班</option>
+            <option value="3">三班</option>
+            <option value="4">四班</option>
+            <option value="5">五班</option>
+        </select>
+        </br>
+        <textarea name="introduce"cols="30" rows="10"></textarea>
+        </br>
+        <input type="submit" value="登陆">   
+    </form>
+</body>
+</html>

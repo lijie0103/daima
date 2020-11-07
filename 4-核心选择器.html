@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心选择器</title>
+    <style>
+        html {
+            color: #333333;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        ul,
+        ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .logo {
+            font-size: 20px;
+            line-height: 2em;
+            padding: 0 2px;
+        }
+
+        a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        /* 父子选择器1+10+1+1=13 */
+        ul.right_nav li a{
+            color:red;
+        }
+        /* 下一个兄弟100+1+1=102 */
+        #wrapper > p ~ *{
+            color: greenyellow;
+        }
+        /* 伪类选择器 */
+        /*ul.nav > li:first-child*/
+        /*ul.nav > li:last-child*/
+        ul.nav > li:hover{
+            background-color: lawngreen;
+        }
+        ul.nav > li:nth-child(2n){
+            background-color: indianred;
+        }
+        ul.nav > li a{
+            line-height: 2em;
+            color:#ffffff;
+        }
+        /* hover和nth的权值相同，所以谁在后看谁*/
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                大气网络化治理云平台
+            </div>
+        </div>
+        <div class="content">
+
+        </div>
+        <div class="left">
+            <ul class="nav">
+                <li><a href="">工程管理</a></li>
+                <li><a href="">设备管理</a></li>
+                <li><a href="">大气监控</a></li>
+                <li><a href="">系统设置</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <div id="wrapper">
+                <p>hello world</p>
+                <ol>
+                    <li>test1</li>
+                    <li>test2</li>
+                </ol>
+                <ul class="right_nav">
+                    <li><a href="">IT</a></li>
+                    <ul>
+                        <li><a href="">javaee</a></li>
+                        <li><a href="">web</a></li>
+                    </ul>
+                    <li><a href="">娱乐</a></li>
+                    <li><a href="">体育</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
