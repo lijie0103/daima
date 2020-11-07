@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伸缩盒布局</title>
+    <link rel="stylesheet" href="../样式.css">
+    <style>
+        ul{
+          padding: 1em 0;
+          background-color: #cccccc;  
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+        ul>li{
+            height: 100px;
+            background-color: seagreen;
+            width: 30%;
+            margin-bottom: 1em;
+            text-align: center;
+            line-height: 100px;
+        }
+        ul>li:nth-child(odd){
+            background-color: salmon;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>one</li>
+        <li>two</li>
+        <li>three
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reduceright</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6];
+        // var arr1 = arr.reduceRight((a,b) => {
+        //     console.log(a,b);
+        //     return a+b;
+        // })
+        // console.log(arr);
+        // console.log(arr1);
+        Array.prototype.myreduceRight = function(callback){
+            this.reverse();
+            var res = callback(this[0],this[1]);
+            for(var i = 1; i < this.length - 1; i++){
+                res = callback(res,this[i+1]);
+            }
+            return res;
+        }
+        var arr1 = arr.myreduceRight((a,b) => {
+            console.log(a,b);
+            return a+b;
+        })
+        console.log(arr);
+        console.log(arr1);
+    </script>
+</body>
+</html>

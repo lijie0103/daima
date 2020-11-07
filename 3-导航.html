@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航</title>
+    <link rel="stylesheet" href="../样式.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1941363_m294t8jcs8d.css">
+    <style>
+        .container{
+            background-color: #f4f4f4;
+        }
+        .content{
+            height: 1000px;
+        }
+        .nav{
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            background-color: #ffffff;
+        }
+        .nav>ul{
+            display: flex;
+            flex-direction: row;
+        }
+        .nav>ul>li{
+            flex-grow: 1;
+            text-align: center;
+        }
+        .nav>ul>li.active{
+            color: tomato;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        头
+        <div class="content">
+            <div class="nav">
+                <ul>
+                    <li>
+                        <div class=" iconfont icon-dingyue"></div>
+                        <div>首页</div>
+                    </li>
+                    <li>
+                        <div class=" iconfont icon-youxiangou"></div>
+                        <div>分类</div>
+                    </li>
+                    <li class="active">
+                        <div class=" iconfont icon-youhuifangshi"></div>
+                        <div>惊喜</div> 
+                    </li>
+                    <li>
+                        <div class=" iconfont icon-haohuo">
+                        </div>
+                        <div>购物车</div>
+                    </li>
+                    <li>
+                        <div class=" iconfont icon-icon_right_"></div>
+                        <div>我</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

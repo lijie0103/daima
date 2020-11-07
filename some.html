@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>some</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6];
+        // var arr1 = arr.some((item,i,arr) =>{
+        //     return item>=6;
+        // })
+        // console.log(arr);
+        // console.log(arr1);
+        Array.prototype.mySome = function(callback){
+            for(var i = 0; i < this.length; i++){
+                if(callback(this[i],i,this)){
+                    return true;
+                }
+            }
+            return false;
+        }
+        var arr1 = arr.mySome((item,i,arr) => {
+            return item > 7;
+        })
+        console.log(arr);
+        console.log(arr1);
+    </script>
+</body>
+</html>

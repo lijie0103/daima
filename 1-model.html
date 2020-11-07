@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模态框</title>
+    <link rel="stylesheet" href="../样式.css">
+    <style>
+        .header{
+            background-color: powderblue;
+            height: 100px;
+        }
+        .content{
+            height: 900px;
+        }
+        .footer{
+            height: 40px;
+            background-color: #666666;
+            color: #ffffff;
+        }
+
+        /* 模态框 */
+        .model_outer{
+            position: fixed;
+            width: 100%;
+            top: 0;bottom: 0;
+            background-color: rgba(0, 0, 0, .4);
+            display: none; 
+        }  
+        /.model_outer>.model{
+            width: 600px;
+            height: 200px;
+            position: absolute;
+            background-color: #ffffff;
+            left: 50%;
+            margin-left: -300px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 模态框 -->
+        <div class="model_outer">
+            <div class="model">
+
+            </div>
+        </div>
+        <div class="header">
+            头
+        </div>
+        <div class="content">
+            体
+            <a href="http://www.baidu.com">百度一下</a>
+        </div>
+        <div class="footer">
+            底部
+        </div>
+    </div>
+</body>
+</html>

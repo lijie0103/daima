@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['a', 'b', 'c', 'd', 'a', 'b', 'c', 'd', 'o'];
+        // var arr = ['a','b','a','b'];
+        function foo(array) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[i] == arr[j]) {
+                        return -1;
+                    }
+                }
+            }
+        }
+        console.log(foo(arr));
+    </script>
+</body>
+
+</html>

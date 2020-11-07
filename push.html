@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>push</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6];
+        // arr.push(6,7);
+        // console.log(arr);
+        Array.prototype.myPush = function(){
+            var l = this.length;
+            for(var i = l; i < l + arguments.length; i++){
+                // console.log(i);
+                // console.log(l);
+                this[i] = arguments[i - l];
+            }
+            return this.length;
+        }
+        arr.myPush(6,7);
+        console.log(arr);
+    </script>
+</body>
+</html>
